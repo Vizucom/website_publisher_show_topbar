@@ -1,0 +1,23 @@
+<openerp>
+    <data>
+		<template id="user_navbar" inherit_id="website.user_navbar">
+
+            <!-- replace 'website and menu_data' condition for the topbar to show up -->
+            <xpath expr="//t[@t-if='website and menu_data']" position="attributes">
+                <attribute name="t-if">website</attribute>
+            </xpath>
+
+            <!-- Put back the menu_data condition where the menu contents get looped -->
+            <xpath expr="//ul[@id='oe_applications']" position="attributes">
+                <attribute name="t-if">menu_data</attribute>
+            </xpath>
+
+        </template>
+        
+        <!-- Add publisher group to the list of those groups who can see the user_navbar view -->
+        <record model="ir.ui.view" id="website.user_navbar">
+            <field name="groups_id" eval="[(4, ref('base.group_website_publisher'))]"/>
+        </record>
+
+    </data>
+</openerp>
